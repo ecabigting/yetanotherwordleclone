@@ -48,4 +48,24 @@ describe('computeGuess', () => {
       LetterState.Miss
     ]);
   })
+
+  it('two letters are present but answer only has one of that letter', () => {
+    expect(computeGuess('allol','smelt')).toEqual([
+      LetterState.Miss,
+      LetterState.Present,
+      LetterState.Miss,
+      LetterState.Miss,
+      LetterState.Miss
+    ]);
+  })
+
+  it('1 letter is match but has multiple instance in the word', () => {
+    expect(computeGuess('allol','colon')).toEqual([
+      LetterState.Miss,
+      LetterState.Miss,
+      LetterState.Match,
+      LetterState.Match,
+      LetterState.Miss
+    ]);
+  })
 });

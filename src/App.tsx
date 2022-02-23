@@ -8,13 +8,13 @@ export default function App() {
           <h1 className='text-4xl text-center'>YetAnotherWordleClone</h1>
       </header>
 
-      <main>
-        <WordRow letters="dude"/>
-        <WordRow letters="where"/>
-        <WordRow letters="is"/>
-        <WordRow letters="my"/>
-        <WordRow letters="car"/>
-        <WordRow letters="dude"/>
+      <main className='grid grid-rows-6 gap-4'>
+        <WordRow letters="robot"/>
+        <WordRow letters="apple"/>
+        <WordRow letters="micro"/>
+        <WordRow letters="boots"/>
+        <WordRow letters="paper"/>
+        <WordRow letters="broo"/>
       </main>
     </div>
   )

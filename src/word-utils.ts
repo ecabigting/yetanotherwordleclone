@@ -13,9 +13,7 @@ export enum LetterState {
   Match = 'Match',
 }
 
-console.log(word);
-
-export function computeGuess(guess: string, answerString: string = word): LetterState[] {
+export function computeGuess(guess: string, answerString: string): LetterState[] {
   const result: LetterState[] = [];
 
     if(guess.length !== answerString.length)

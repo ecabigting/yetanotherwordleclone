@@ -29,9 +29,9 @@ interface CharBoxProps {
 
 function CharBox({ value,state }: CharBoxProps) {
   const stateStyles = state == null ? '' : characterStateStyles[state];
-  return <div className={
+  return <span className={
     `inline-block text-center border-2 p-4 h-16 text-2xl bg-gray-500  border-gray-500 uppercase font-extrabold ${stateStyles}`
-  }>{value}</div>;
+  }>{value}</span>;
 }
 
 const characterStateStyles = {

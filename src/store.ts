@@ -12,7 +12,7 @@ interface StoreState {
 export const userStore = create<StoreState>(persist(
     (set) => ({
         answer: getRandomWord(),
-        guesses: ['buguk','kuyad','lanam'],
+        guesses: ['bulag','ukyat'],
         addGuess: (guess:string) => {
             set((state) => ({
                 guesses: [...state.guesses,guess]

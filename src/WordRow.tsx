@@ -1,22 +1,20 @@
 import { LETTER_LENGTH } from './App';
-import { userStore } from './store';
-import { computeGuess, LetterState } from './word-utils'
+import {LetterState } from './word-utils'
 
 interface WordRowProps {
   letters: string;
+  result?: LetterState[];
 }
 
-export default function WordRow({ letters: letterProp = '' }: WordRowProps) {
-  const answer = userStore((state)=> state.answer)
+export default function WordRow({ letters: letterProp = '',result=[] }: WordRowProps) {
+
   const letterRemaining = LETTER_LENGTH - letterProp.length;
   const letters = letterProp.split('').concat(Array(letterRemaining).fill(''));
-
-  const guessStates = computeGuess(letterProp,answer);
 
   return (
     <div className="grid grid-cols-5 gap-4">
       {letters.map((char,ctr) => (
-        <CharBox key={ctr} value={char} state={guessStates[ctr]}/>
+        <CharBox key={ctr} value={char} state={result[ctr]}/>
       ))}
     </div>
   );

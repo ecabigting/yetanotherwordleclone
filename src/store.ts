@@ -1,31 +1,44 @@
-import create from "zustand"
-import { persist } from "zustand/middleware"
-import { getRandomWord } from "./word-utils";
+import create from 'zustand';
+import { persist } from 'zustand/middleware';
+import { computeGuess, getRandomWord, LetterState } from './word-utils';
 
-interface StoreState {
-    answer: string,
-    guesses: string[],
-    addGuess: (guess:string) => void;
-    newGame: () => void;
+interface GuessRow {
+  guess: string;
+  result?: LetterState[];
 }
 
-export const userStore = create<StoreState>(persist(
-    (set) => ({
-        answer: getRandomWord(),
-        guesses: ['bulag','ukyat'],
-        addGuess: (guess:string) => {
-            set((state) => ({
-                guesses: [...state.guesses,guess]
-            }))
-        },
-        newGame:()=> {
-            set({
-                answer: getRandomWord(),
-                guesses: [],
-            })
-        }
+interface StoreState {
+  answer: string;
+  rows: GuessRow[];
+  addGuess: (guess: string) => void;
+  newGame: () => void;
+}
+
+export const userStore = create<StoreState>(
+  persist(
+    (set,get) => ({
+      answer: getRandomWord(),
+      rows: [],
+      addGuess: (guess: string) => {
+        set((state) => ({
+          rows: [
+            ...state.rows,
+            {
+              guess,
+              result: computeGuess(guess, state.answer),
+            },
+          ],
+        }));
+      },
+      newGame: () => {
+        set({
+          answer: getRandomWord(),
+          rows: [],
+        });
+      },
     }),
-    { 
-        name: "bale-ng-soy"
+    {
+      name: 'bale-ng-soy',
     }
-));
+  )
+);

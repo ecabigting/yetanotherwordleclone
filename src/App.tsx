@@ -19,16 +19,16 @@ export default function App() {
     setGuess(e.target.value);
   };
 
-  let rows = [...state.guesses];
+  let rows = [...state.rows];
 
   if(rows.length < GUESS_LENGTH)
   {
-    rows.push(guess);
+    rows.push({guess});
   }
 
   const numberOfGuessesRemaining = GUESS_LENGTH - rows.length;
 
-  const gameOver = state.guesses.length === GUESS_LENGTH;
+  const gameOver = state.rows.length === GUESS_LENGTH;
 
   rows = rows.concat(...Array(numberOfGuessesRemaining).fill(''));
 
@@ -48,8 +48,8 @@ export default function App() {
       
 
       <main className='grid grid-rows-6 gap-4'>
-        {rows.map((word,index)=> (
-            <WordRow letters={word} key={index}/>
+        {rows.map(({guess,result},index)=> (
+            <WordRow letters={guess} key={index} result={result}/>
           ))
         }
       </main>

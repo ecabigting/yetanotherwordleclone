@@ -12,22 +12,19 @@ interface StoreState {
   rows: GuessRow[];
   gameState: 'playing' | 'won' | 'lost';
   addGuess: (guess: string) => void;
-  newGame: () => void;
+  newGame: (initialGuess?: string[]) => void;
 }
 
 export const GUESS_LENGTH = 6;
 
 export const userStore = create<StoreState>(
   persist(
-    (set, get) => ({
-      answer: getRandomWord(),
-      rows: [],
-      gameState: 'playing',
-      addGuess: (guess: string) => {
+    (set, get) => {
+      function addGuess(guess: string) {
         const result = computeGuess(guess, get().answer);
-
+  
         const playerWon = result.every((i) => i === LetterState.Match);
-
+  
         const rows = [
           ...get().rows,
           {
@@ -35,20 +32,29 @@ export const userStore = create<StoreState>(
             result,
           },
         ];
-
+  
         set(() => ({
           rows,
           gameState: playerWon ? 'won' : rows.length === GUESS_LENGTH ? 'lost' : 'playing',
         }));
-      },
-      newGame: () => {
-        set({
-          answer: getRandomWord(),
-          rows: [],
-          gameState: 'playing',
-        });
-      },
-    }),
+      };
+      
+      return ({
+        answer: getRandomWord(),
+        rows: [],
+        gameState: 'playing',
+        addGuess,
+        newGame: (initialRows = []) => {
+          set({
+            answer: getRandomWord(),
+            rows: [],
+            gameState: 'playing',
+          });
+
+          initialRows.forEach(addGuess);
+        },
+      })
+    },
     {
       name: 'bale-ng-soy',
     }

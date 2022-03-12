@@ -10,4 +10,6 @@
 
 <hr/>
 
-A Wordle clone built with React, Zustand, Vite, Tailwind, and Vitest
+A Wordle clone built with React, Zustand, Vite, Tailwind, and Vitest.
+
+Currently under development. Check Main branch for commit progress.

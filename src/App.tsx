@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { userStore,GUESS_LENGTH } from './store';
+import { isValidWord } from './word-utils';
 import WordRow from './WordRow'
 
 
@@ -8,12 +9,41 @@ export const LETTER_LENGTH = 5;
 export default function App() {
   const state = userStore();
   const [guess,setGuess] = useGuess();
+  const [showInvalidGuess,setInvalidGuess] = useState(false);
+  const addGuess = userStore(s => s.addGuess);
+  const previousGuess = usePrevious(guess);
+
+  useEffect(()=>{
+    let id: any;
+    if(setInvalidGuess)
+    {
+      id = setTimeout(()=> setInvalidGuess(false),1500);
+    }
+
+    return () => clearTimeout(id);
+  },[showInvalidGuess]);
+
+  useEffect(()=>{
+    if(guess.length === 0 && previousGuess?.length === LETTER_LENGTH) {
+      if(isValidWord(previousGuess))
+      {
+        addGuess(previousGuess);
+        setInvalidGuess(false);
+      }else
+      {
+        setInvalidGuess(true);
+        setGuess(previousGuess);
+      }      
+    }
+  },[guess])
 
   let rows = [...state.rows];
 
+  let currentRow = 0;
+
   if(rows.length < GUESS_LENGTH)
   {
-    rows.push({guess});
+    currentRow = rows.push({guess}) - 1;
   }
 
   const numberOfGuessesRemaining = GUESS_LENGTH - rows.length;
@@ -26,13 +56,13 @@ export default function App() {
     <div className='mx-auto w-96 relative'>
       <header className='border-b border-gray-500 pb-2 mb-2 my-2'>
           <h1 className='text-4xl text-center text-white'>YetAnotherWordleClone</h1>
-      </header>
-
-      
+      </header>   
 
       <main className='grid grid-rows-6 gap-4'>
         {rows.map(({guess,result},index)=> (
-            <WordRow letters={guess} key={index} result={result}/>
+            <WordRow letters={guess} key={index} result={result}
+              className={currentRow === index && showInvalidGuess ? 'animate-bounce' : ''}
+            />
           ))
         }
       </main>
@@ -53,10 +83,9 @@ export default function App() {
 }
 
 function useGuess() : [string, React.Dispatch<React.SetStateAction<string>>] 
-{ 
-  const addGuess = userStore(s => s.addGuess);
+{   
   const [guess,setGuess] = useState('');
-  const previousGuess = usePrevious(guess);
+  
 
   const onKeyDown = (e: KeyboardEvent) => {
     let letter = e.key;
@@ -88,12 +117,6 @@ function useGuess() : [string, React.Dispatch<React.SetStateAction<string>>]
       document.removeEventListener('keydown',onKeyDown);
     }
   });
-
-  useEffect(()=>{
-    if(guess.length === 0 && previousGuess?.length === LETTER_LENGTH) {
-      addGuess(previousGuess);
-    }
-  },[guess])
 
   return [guess, setGuess];
 

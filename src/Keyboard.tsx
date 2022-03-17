@@ -1,5 +1,14 @@
-export default function Keyboard()
+import React from "react";
+
+export default function Keyboard({onClick : onClickProp }: {onClick : (letter:string) => void})
 {
+    const onClick = (e: React.MouseEvent<HTMLButtonElement>)=>{
+        const letter = e.currentTarget.textContent;
+        
+        
+        onClickProp(letter!);
+    };
+
     return <div className="flex flex-col">
         {KeyboardChars.map((keyCharRow,rIndex) => {
             return (
@@ -10,7 +19,13 @@ export default function Keyboard()
                         if(key !== '') {
                             styles+=" bg-gray-400"
                         }
-                        return <button key={i} className={styles}>{key}</button>
+
+                        if(key === ''){
+                            styles += ' pointer-events-none'
+                        }
+                        return <button key={i} 
+                        onClick={onClick}
+                        className={styles}>{key}</button>
                     })
                 }
             </div>)

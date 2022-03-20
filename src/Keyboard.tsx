@@ -13,7 +13,7 @@ export default function Keyboard({onClick : onClickProp }: {onClick : (letter:st
         onClickProp(letter!);
     };
 
-    return <div className="flex flex-col">
+    return <div className="flex flex-col p-2">
         {KeyboardChars.map((keyCharRow,rIndex) => {
             return (
             <div key={rIndex} className="flex justify-center my-2 space-x-1.5">
@@ -33,6 +33,11 @@ export default function Keyboard({onClick : onClickProp }: {onClick : (letter:st
                         }else
                          if(key !== '') {
                             styles += ' bg-gray-400';
+                        }
+
+                        if(key === 'Enter' || key === 'Backspace')
+                        {
+                            styles += ' text-xs p-1';
                         }
 
                         return <button key={i} 

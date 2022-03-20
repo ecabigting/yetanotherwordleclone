@@ -50,11 +50,11 @@ export default function App() {
 
   return (
     <div className='mx-auto w-96 relative'>
-      <header className='border-b border-gray-500 pb-2 mb-2 my-2'>
-        <h1 className='text-4xl text-center text-white'>YetAnotherWordleClone</h1>
+      <header className='border-b border-gray-500 pb-2 mb-2 my-2 p-2'>
+        <h1 className='text-2xl text-center text-white uppercase'>AMANU</h1>
       </header>
 
-      <main className='grid grid-rows-6 gap-4'>
+      <main className='grid grid-rows-6 gap-4 p-2'>
         {rows.map(({ guess, result }, index) => (
           <WordRow
             letters={guess}
@@ -75,8 +75,11 @@ export default function App() {
           className='absolute bg-white
               left-0 right-0 top-1/4 p-6 w-3/4 mx-auto rounded border border-gray-500 text-center'
         >
-          Game Over!
-          <h4 className=''>word is : {state.answer}</h4>
+          { state.gameState == 'won' && (<span className='text-bold text-xl'>Aba! Sinabut ya!</span>)} 
+
+          { state.gameState == 'lost' && (<span className='text-bold text-xl'>Mesambut ata soy!?</span>)} 
+
+          <h4 className=''>ing amanu : <span className='text-bold uppercase text-2xl' >{state.answer}</span></h4>
           <button
             className='block border rounded border-green-500 bg-green-500 p-2 mt-4 mx-auto shadow'
             onClick={() => {
@@ -84,7 +87,7 @@ export default function App() {
               setGuess('');
             }}
           >
-            Restart
+            Bayung Piyalung!
           </button>
         </div>
       )}

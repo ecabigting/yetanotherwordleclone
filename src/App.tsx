@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Keyboard from './Keyboard';
 import { userStore, GUESS_LENGTH } from './store';
-import { isValidWord } from './word-utils';
+import { isValidWord, LetterState } from './word-utils';
 import WordRow from './WordRow';
 
 export const LETTER_LENGTH = 5;
@@ -49,9 +49,57 @@ export default function App() {
   rows = rows.concat(...Array(numberOfGuessesRemaining).fill(''));
 
   return (
-    <div className='mx-auto w-96 relative'>
-      <header className='border-b border-gray-500 pb-2 mb-2 my-2 p-2'>
-        <h1 className='text-2xl text-center text-white uppercase'>AMANU</h1>
+    <div className='mx-auto w-96 relative h-screen'>
+      <header className='border-b border-gray-500 py-3 text-center'>
+      <span className={
+        `inline-block text-center border-2 p-3 m-1 text-white 
+        text-sm
+        bg-gray-500 border-gray-500 uppercase font-extrabold `
+      }>P</span>
+
+      <span className={
+          `inline-block text-center border-2 p-3 m-1 text-white 
+          text-sm
+          bg-green-500 border-green-500 uppercase font-extrabold `
+        }>A</span>
+
+<span className={
+          `inline-block text-center border-2 p-3 m-1 text-white 
+          text-sm
+          bg-green-500 border-green-500 uppercase font-extrabold `
+        }>M</span>
+
+<span className={
+          `inline-block text-center border-2 p-3 m-1 text-white 
+          text-sm
+          bg-green-500 border-green-500 uppercase font-extrabold `
+        }>A</span>
+
+<span className={
+          `inline-block text-center border-2 p-3 m-1 text-white 
+          text-sm
+          bg-green-500 border-green-500 uppercase font-extrabold `
+        }>N</span>
+
+<span className={
+          `inline-block text-center border-2 p-3 m-1 text-white 
+          text-sm
+          bg-green-500 border-green-500 uppercase font-extrabold `
+        }>U</span>
+
+<span className={
+          `inline-block text-center border-2 p-3 m-1 text-white 
+          text-sm
+          bg-gray-500 border-gray-500 uppercase font-extrabold `
+        }>L</span>
+
+<span className={
+          `inline-block text-center border-2 p-3 m-1 text-white 
+          text-sm
+          bg-yellow-500 border-yellow-500 uppercase font-extrabold `
+        }>A</span>
+
+        <span className='text-gray-300 text-center text-xs'>balamu wordle yamu naman oneng kapampangan la reng amanu..</span>
       </header>
 
       <main className='grid grid-rows-6 gap-4 p-2'>
@@ -75,9 +123,9 @@ export default function App() {
           className='absolute bg-white
               left-0 right-0 top-1/4 p-6 w-3/4 mx-auto rounded border border-gray-500 text-center'
         >
-          { state.gameState == 'won' && (<span className='text-bold text-xl'>Aba! Sinabut ya!</span>)} 
+          { state.gameState == 'won' && (<span className='text-bold'>Aba! Sinabut ya!</span>)} 
 
-          { state.gameState == 'lost' && (<span className='text-bold text-xl'>Mesambut ata soy!?</span>)} 
+          { state.gameState == 'lost' && (<span className='text-bold'>Mesambut ata soy!?</span>)} 
 
           <h4 className=''>ing amanu : <span className='text-bold uppercase text-2xl' >{state.answer}</span></h4>
           <button
@@ -92,9 +140,12 @@ export default function App() {
         </div>
       )}
 
+    <footer className='w-full text-white text-center absolute bottom-0 text-sm'>
+      :github
+    </footer>
     </div>
 
-    
+
   );
 }
 

@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import Keyboard from './Keyboard';
 import { userStore, GUESS_LENGTH } from './store';
 import { isValidWord } from './word-utils';
 import WordRow from './WordRow';
@@ -7,7 +8,7 @@ export const LETTER_LENGTH = 5;
 
 export default function App() {
   const state = userStore();
-  const [guess, setGuess] = useGuess();
+  const [guess, setGuess,addGuessLetter] = useGuess();
   const [showInvalidGuess, setInvalidGuess] = useState(false);
   const addGuess = userStore((s) => s.addGuess);
   const previousGuess = usePrevious(guess);
@@ -64,6 +65,10 @@ export default function App() {
         ))}
       </main>
 
+      <Keyboard onClick={letter => {
+        addGuessLetter(letter);
+      }}/>
+
       {gameOver && (
         <div
           role='modal'
@@ -83,15 +88,17 @@ export default function App() {
           </button>
         </div>
       )}
+
     </div>
+
+    
   );
 }
 
-function useGuess(): [string, React.Dispatch<React.SetStateAction<string>>] {
+function useGuess(): [string, React.Dispatch<React.SetStateAction<string>>,(letter:string)=> void] {
   const [guess, setGuess] = useState('');
 
-  const onKeyDown = (e: KeyboardEvent) => {
-    let letter = e.key
+  const addGuessLetter = (letter: string) => {
     setGuess((curGuess) => {
       const newGuess = letter.length === 1 ? curGuess + letter : curGuess;
 
@@ -110,6 +117,11 @@ function useGuess(): [string, React.Dispatch<React.SetStateAction<string>>] {
 
       return newGuess;
     });
+  }
+
+  const onKeyDown = (e: KeyboardEvent) => {
+    let letter = e.key
+    addGuessLetter(letter);
   };
 
   useEffect(() => {
@@ -119,7 +131,7 @@ function useGuess(): [string, React.Dispatch<React.SetStateAction<string>>] {
     };
   });
 
-  return [guess, setGuess];
+  return [guess, setGuess,addGuessLetter];
 }
 
 function usePrevious<T>(value: T): T {

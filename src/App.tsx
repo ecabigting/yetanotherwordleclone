@@ -141,7 +141,7 @@ export default function App() {
       )}
 
     <footer className='w-full text-white text-center absolute bottom-0 text-sm'>
-      :github
+      <a href="https://github.com/ecabigting/yetanotherwordleclone/tree/kapampangan_version">github</a>
     </footer>
     </div>
 

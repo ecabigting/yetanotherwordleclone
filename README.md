@@ -13,4 +13,4 @@
 
 Balam Wordle yamu naman oneng **KAPAMAPANGAN** la reng amanu.
 
-Subukan me [keni](yetanotherwordleclone.netlify.app)
+Subukan me [keni](https://yetanotherwordleclone.netlify.app)

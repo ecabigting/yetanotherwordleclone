@@ -140,8 +140,10 @@ export default function App() {
         </div>
       )}
 
-    <footer className='w-full text-white text-center absolute bottom-0 text-sm'>
-      <a href="https://github.com/ecabigting/yetanotherwordleclone/tree/kapampangan_version">github</a>
+    <footer className='w-full text-black text-center absolute bottom-0 text-sm bg-gray-300 p-1'>
+      <a className='inline-block' href="https://github.com/ecabigting/yetanotherwordleclone/tree/kapampangan_version">
+        <img height="24" width="24" src="https://unpkg.com/simple-icons@v6/icons/github.svg"/>
+      </a>
     </footer>
     </div>
 

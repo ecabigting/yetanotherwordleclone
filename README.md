@@ -11,6 +11,8 @@
 
 <hr/>
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/7cfcbb69-61aa-4b5f-97d5-448931fe49f1/deploy-status)](https://app.netlify.com/sites/pamanula/deploys)
+
 Balam Wordle yamu naman oneng **KAPAMAPANGAN** la reng amanu.
 
 Subukan me [keni](https://pamanula.netlify.app)

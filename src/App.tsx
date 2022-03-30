@@ -49,7 +49,7 @@ export default function App() {
   rows = rows.concat(...Array(numberOfGuessesRemaining).fill(''));
 
   return (
-    <div className='mx-auto w-96 relative h-screen'>
+    <div className='mx-auto w-96 relative'>
       <header className='border-b border-gray-500 py-3 text-center'>
       <span className={
         `inline-block text-center border-2 p-3 m-1 text-white 
@@ -123,11 +123,11 @@ export default function App() {
           className='absolute bg-white
               left-0 right-0 top-1/4 p-6 w-3/4 mx-auto rounded border border-gray-500 text-center'
         >
-          { state.gameState == 'won' && (<span className='text-bold'>Aba! Sinabut ya!</span>)} 
+          { state.gameState == 'won' && (<span className='text-bold'>Aba! Sinambut ya!</span>)} 
 
           { state.gameState == 'lost' && (<span className='text-bold'>Mesambut ata soy!?</span>)} 
 
-          <h4 className=''>ing amanu : <span className='text-bold uppercase text-2xl' >{state.answer}</span></h4>
+          <h4 className=''>Ing amanu : <span className='text-bold uppercase text-2xl' >{state.answer}</span></h4>
           <button
             className='block border rounded border-green-500 bg-green-500 p-2 mt-4 mx-auto shadow'
             onClick={() => {
@@ -140,7 +140,7 @@ export default function App() {
         </div>
       )}
 
-    <footer className='w-full text-black text-center absolute bottom-0 text-sm bg-gray-300 p-1'>
+    <footer className='w-full text-black text-center absolute mt-14 text-sm bg-gray-300 p-1'>
       <a className='inline-block' href="https://github.com/ecabigting/yetanotherwordleclone/tree/kapampangan_version">
         <img height="24" width="24" src="https://unpkg.com/simple-icons@v6/icons/github.svg"/>
       </a>

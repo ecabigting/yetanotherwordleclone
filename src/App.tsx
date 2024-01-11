@@ -68,7 +68,7 @@ export default function App() {
       <Keyboard onClick={letter => {
         addGuessLetter(letter);
       }}/>
-      <div className='w-100 h-100 p-3 m-1 text-white p-t-1 border-t-white border-t-2 items-center justify-center'>
+      <div className='w-100 h-100 p-3 m-1 text-white p-t-1 border-t-gray-500 border-t items-center justify-center'>
         <a href='https://github.com/ecabigting/yetanotherwordleclone' target='_blank'>
         <img src={ghLogo} className='mx-auto w-8 h-8'/>
         </a>

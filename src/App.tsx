@@ -3,6 +3,7 @@ import Keyboard from './Keyboard';
 import { userStore, GUESS_LENGTH } from './store';
 import { isValidWord } from './word-utils';
 import WordRow from './WordRow';
+import ghLogo from '../gh-icon.png';
 
 export const LETTER_LENGTH = 5;
 
@@ -64,10 +65,14 @@ export default function App() {
           />
         ))}
       </main>
-
       <Keyboard onClick={letter => {
         addGuessLetter(letter);
       }}/>
+      <div className='w-100 h-100 p-3 m-1 text-white p-t-1 border-t-white border-t-2 items-center justify-center'>
+        <a href='https://github.com/ecabigting/yetanotherwordleclone' target='_blank'>
+        <img src={ghLogo} className='mx-auto w-8 h-8'/>
+        </a>
+      </div>
 
       {gameOver && (
         <div
